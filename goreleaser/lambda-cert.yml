@@ -1,0 +1,19 @@
+project_name: lambda-cert
+
+builds:
+  -
+    binary: lambda-cert
+    env:
+      - CGO_ENABLED=0
+
+    goos:
+      - linux
+
+    goarch:
+      - amd64
+
+    main: ./cmd/lambda-cert/
+
+archive:
+  name_template: "{{ .ProjectName }}"
+  format: zip
