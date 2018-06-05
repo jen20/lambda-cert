@@ -19,4 +19,8 @@ resource "aws_kms_key" "key" {
 	description = "${var.description} TLS Keys"
 	deletion_window_in_days = 14
 	policy = "${data.aws_iam_policy_document.key.json}"
+
+	tags {
+		Name = "${var.description} TLS Keys"
+	}
 }
