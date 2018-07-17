@@ -43,6 +43,7 @@ resource "aws_lambda_function" "cert" {
 			BUCKET_NAME = "${aws_s3_bucket.key.id}"
 			CERTIFICATE_NAME = "${var.service_name}.${var.top_level_domain}"
 			ADMIN_EMAIL = "${var.admin_email}"
+			GENERATE_JAVA_KEYSTORE = "${var.generate_java_keystore}"
 		}
 	}
 }

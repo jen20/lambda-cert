@@ -52,6 +52,7 @@ data "aws_iam_policy_document" "cert" {
 			"${aws_s3_bucket.key.arn}/config/config.json.enc",
 			"${aws_s3_bucket.key.arn}/${var.service_name}.${var.top_level_domain}/cert.crt",
 			"${aws_s3_bucket.key.arn}/${var.service_name}.${var.top_level_domain}/cert.key.enc",
+			"${aws_s3_bucket.key.arn}/${var.service_name}.${var.top_level_domain}/keystore.jks",
 		]
 	}
 }

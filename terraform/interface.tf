@@ -44,6 +44,12 @@ variable "admin_email" {
 	description = "Admin Email for Let's Encrypt registration"
 }
 
+variable "generate_java_keystore" {
+	type = "string"
+	description = "Set to any non-empty value to generate a Java KeyStore from the certificate"
+	default = ""
+}
+
 data "aws_route53_zone" "public" {
 	name = "${var.top_level_domain}."
 	private_zone = false
