@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/jen20/lambda-cert/cert"
 	"github.com/jen20/lambda-cert/client"
+	"github.com/jen20/lambda-cert/jks"
 )
 
 func CertHandler(ctx context.Context) error {
@@ -40,6 +41,11 @@ func CertHandler(ctx context.Context) error {
 		if err != nil {
 			return fmt.Errorf("[ERROR] Error reading CERTIFICATE_ADDITIONAL_NAMES: %s", err)
 		}
+	}
+
+	buildJavaKeyStore := false
+	if os.Getenv("GENERATE_JAVA_KEYSTORE") != "" {
+		buildJavaKeyStore = true
 	}
 
 	region := os.Getenv("AWS_REGION")
@@ -125,6 +131,21 @@ func CertHandler(ctx context.Context) error {
 	if err != nil {
 		log.Printf("[ERROR] Uploading Certificate: %s", err)
 		return err
+	}
+
+	if buildJavaKeyStore {
+		javaKeyStore, err := jks.BuildJavaKeyStore(certificate)
+		if err != nil {
+			log.Printf("[ERROR] Constructing Java Key Store: %s", err)
+			return err
+		}
+
+		keyStorePath := path.Join(domainName, "keystore.jks")
+		err = s3Client.PutUnencryptedObject(keyStorePath, javaKeyStore)
+		if err != nil {
+			log.Printf("[ERROR] Uploading Java Key Store: %s", err)
+			return err
+		}
 	}
 
 	return nil

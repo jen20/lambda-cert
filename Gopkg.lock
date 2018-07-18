@@ -90,6 +90,12 @@
   version = "v1.0.5"
 
 [[projects]]
+  name = "github.com/pavel-v-chernykh/keystore-go"
+  packages = ["."]
+  revision = "7bbcda7e585ed7a01e8610f6e19dde5bc2c1f6d0"
+  version = "v2.1.0"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -162,6 +168,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b09b8a1c6b983e72ff5c26e7e6da68603c8f603af7c50c81f72ad15ea1be8d62"
+  inputs-digest = "1f544581f1cd9dc3035f7ce193c0e0f230daa141ba6899d593f55c5ec02bf581"
   solver-name = "gps-cdcl"
   solver-version = 1
