@@ -2,7 +2,8 @@
 
 `lambda-cert` is a lambda function which can be used to obtain TLS certificates from a certificate
 authority using the `acme` API (for example, [Let's Encrypt][le]). The private key is encrypted
-using KMS, and stored along with the certificate (unencrypted) in an S3 bucket.
+using KMS, and stored along with the certificate (unencrypted) in an S3 bucket. Optionally, the
+private key can be re-encoded using PCKS8 and added to a Java KeyStore which is then uploaded to S3.
 
 A policy granting access to these files and the Decrypt operation for the KMS key can be assigned to
 a role associated with an instance profile in order for servers to obtain the keys on startup.
@@ -81,8 +82,9 @@ Substitute values as necessary for your certificates:
             ],
             "Resource": [
                 "arn:aws:s3:::<BUCKET NAME>/<BUCKET PREFIX>/config/config.json.enc",
-                "arn:aws:s3:::<BUCKET NAME>/<BUCKET_PRFIX>/<NAME>/cert.crt",
-                "arn:aws:s3:::<BUCKET NAME>/<BUCKET_PRFIX>/<NAME>/cert.key.enc"
+                "arn:aws:s3:::<BUCKET NAME>/<BUCKET PREFIX>/<NAME>/cert.crt",
+                "arn:aws:s3:::<BUCKET NAME>/<BUCKET PREFIX>/<NAME>/cert.key.enc",
+		"arn:aws:s3:::<BUCKET NAME>/<BUCKET PREFIX>/<NAME>/keystore.jks"
             ]
         },
         {

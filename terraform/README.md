@@ -21,6 +21,8 @@ module "lambda_cert" {
         bucket_name_prefix = "vault-tls"
         service_name = "*.vault"
         top_level_domain = "<INSERT TLD HERE>"
+
+	generate_java_keystore = true
         
         admin_email = "<INSERT EMAIL HERE>"
         
@@ -38,6 +40,8 @@ The following variables are required:
 - `handler_package` - Path to a release package from this repository.
 - `handler_package_sha` - SHA256 checksum of the release package.
 - `bucket_name_prefix` - Prefix used for the S3 bucket name. A suffix of `-key` is applied.
+- `generate_java_keystore` - Set to true to upload a Java Keystore containing the obtained
+  certificate.
 - `service_name` - The name to use for the certificate (e.g. `vault`). Forms the complete name when
   `top_level_domain` is appended. Wildcards certificates can be issued using `*`.
 - `top_level_domain` - The TLD of the name for the certificate (e.g. `amazon.com`). Forms the
