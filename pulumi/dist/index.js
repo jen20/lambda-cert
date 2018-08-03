@@ -32,7 +32,7 @@ exports.letsEncryptV2ProductionUrl = "https://acme-v02.api.letsencrypt.org/direc
 class LambdaCert extends pulumi_1.ComponentResource {
     static create(name, inputs, opts) {
         return __awaiter(this, void 0, void 0, function* () {
-            const instance = new LambdaCert(`${name}-lambda-cert`, opts);
+            const instance = new LambdaCert(`${name}-lambda-cert`, inputs, opts);
             const instanceParent = { parent: instance };
             const releaseURL = "https://github.com/jen20/lambda-cert/releases/download/v1.1.0/lambda-cert.zip";
             const acmeUrl = inputs.acmeUrl || exports.letsEncryptV2StagingUrl;
@@ -207,8 +207,14 @@ class LambdaCert extends pulumi_1.ComponentResource {
             return instance;
         });
     }
-    constructor(name, opts) {
-        super("operator-error:aws:LambdaCert", name, {}, opts);
+    constructor(name, inputs, opts) {
+        super("operator-error:aws:LambdaCert", name, inputs, opts);
+        this.registerOutputs({
+            keyBucketArn: this.keyBucketArn,
+            keyBucketName: this.keyBucketName,
+            kmsKeyArn: this.kmsKeyArn,
+            kmsKeyId: this.kmsKeyId,
+        });
     }
 }
 exports.LambdaCert = LambdaCert;

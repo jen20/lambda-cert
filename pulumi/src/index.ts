@@ -118,7 +118,7 @@ export class LambdaCert extends ComponentResource implements LambdaCertOutputs {
 
     public static async create(name: string, inputs: LambdaCertInputs,
                                opts?: ResourceOptions): Promise<LambdaCert> {
-        const instance = new LambdaCert(`${name}-lambda-cert`, opts);
+        const instance = new LambdaCert(`${name}-lambda-cert`, inputs, opts);
         const instanceParent = {parent: instance};
 
         const releaseURL = "https://github.com/jen20/lambda-cert/releases/download/v1.1.0/lambda-cert.zip";
@@ -317,7 +317,14 @@ export class LambdaCert extends ComponentResource implements LambdaCertOutputs {
         return instance;
     }
 
-    private constructor(name: string, opts?: ResourceOptions) {
-        super("operator-error:aws:LambdaCert", name, {}, opts);
+    private constructor(name: string, inputs: LambdaCertInputs, opts?: ResourceOptions) {
+        super("operator-error:aws:LambdaCert", name, inputs, opts);
+
+        this.registerOutputs({
+            keyBucketArn: this.keyBucketArn,
+            keyBucketName: this.keyBucketName,
+            kmsKeyArn: this.kmsKeyArn,
+            kmsKeyId: this.kmsKeyId,
+        });
     }
 }
