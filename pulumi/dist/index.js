@@ -159,14 +159,17 @@ class LambdaCert extends pulumi_1.ComponentResource {
             }, instanceParent);
             const environment = pulumi_1.all([keyBucket.bucket, kmsKey.keyId])
                 .apply(([bucketName, kmsKeyId]) => {
-                return {
+                const variables = {
                     ACME_SERVER_URL: acmeUrl,
                     KMS_KEY_ID: kmsKeyId,
                     BUCKET_NAME: bucketName,
                     CERTIFICATE_NAME: `${inputs.domainNamePrefix}.${inputs.route53DomainName}`,
                     ADMIN_EMAIL: inputs.adminEmail,
-                    GENERATE_JAVA_KEYSTORE: inputs.generateJavaKeyStore ? "true" : "false",
                 };
+                if (inputs.generateJavaKeyStore) {
+                    variables.GENERATE_JAVA_KEYSTORE = true;
+                }
+                return variables;
             });
             const certTags = Object.assign({
                 Name: `Maintain TLS Keys for ${inputs.description}`,
