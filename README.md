@@ -43,6 +43,12 @@ trusting these._
 
 Feedback, issues and pull requests are welcome!
 
+### Pulumi Component
+
+A [Pulumi][pulumi] component is included in the `pulumi/` directory, and also published in the
+[npm][npm] registry as [`@operator-error/pulumi-lambda-cert`][npmmod]. See the
+[README][pulumireadme] in that directory for more documentation.
+
 ### Terraform Module
 
 A [Terraform][terraform] module is included in the `terraform/` directory. See the
@@ -113,3 +119,7 @@ Substitute values as necessary for your certificates:
 [mage]: https://magefile.org
 [terraform]: https://terraform.io
 [tfreadme]: ./terraform/README.md
+[pulumi]: https://www.pulumi.io
+[npm]: https://www.npmjs.com
+[npmmod]: https://www.npmjs.com/package/@operator-error/pulumi-lambda-cert
+[pulumireadme]: ./pulumi/README.md
