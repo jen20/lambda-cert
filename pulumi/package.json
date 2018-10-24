@@ -1,6 +1,6 @@
 {
   "name": "@operator-error/pulumi-lambda-cert",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Maintain Let's Encrypt certificates using Lambda",
   "author": "James Nugent",
   "license": "MPL-2.0",
@@ -25,12 +25,12 @@
     "url": "https://github.com/jen20/lambda-cert/issues"
   },
   "devDependencies": {
-    "@types/node": "^10.5.2",
-    "tslint": "^5.10.0",
-    "typedoc": "^0.11.1",
-    "typescript": "^2.9.2"
+    "@types/node": "latest",
+    "tslint": "latest",
+    "typedoc": "latest",
+    "typescript": "latest"
   },
   "dependencies": {
-    "@pulumi/aws": "^0.14.5"
+    "@pulumi/aws": "latest"
   }
 }
